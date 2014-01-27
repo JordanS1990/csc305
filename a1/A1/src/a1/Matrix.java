@@ -128,7 +128,7 @@ public class Matrix {
         
         for(int i=0;i<this.rows;i++) {
             for(int j=0;j<this.cols;j++) {
-                System.out.print(this.matrix[i][j]);
+                System.out.print((int)this.matrix[i][j]);
                 System.out.print(" ");
             }
             System.out.print("\n");

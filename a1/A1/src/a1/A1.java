@@ -5,7 +5,6 @@
 package a1;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -14,10 +13,6 @@ import java.io.InputStreamReader;
  * @author jssmythe
  */
 public class A1 {
-
-    /**
-     * @param args the command line arguments
-     */
     
     public static Matrix m1;
     public static Matrix m2;
@@ -128,49 +123,13 @@ public class A1 {
                     p2.showPoint();
                 }  
             }
+            else if(command.equals("Run Tests")) {
+                new A1().tests();
+            }
             else if(command.equals("Finish")) {
                 break;
             }
         }
-        /*
-        Matrix m1 = new Matrix();
-        Matrix m2 = new Matrix(4,4,new double[][] {{1,2,3,4},{4,3,2,1},{9,8,7,6},{6,7,8,9}});
-        Matrix m2same = new Matrix(4,4,new double[][] {{1,2,3,4},{4,3,2,1},{9,8,7,6},{6,7,8,9}});
-        
-        Matrix mult1 = new Matrix(3,3,new double[][] {{1,2,3},{4,5,6},{7,8,9}});
-        Matrix mult2 = new Matrix(3,3,new double[][] {{9,8,7},{6,5,4},{3,2,1}});
-        
-        Matrix vector1 = new Matrix(3,1,new double[][] {{1},{2},{3}});
-        Matrix vector2 = new Matrix(3,1,new double[][] {{4},{5},{6}});
-        
-        
-        Matrix result = mult1.multiplication(mult2);
-        
-        int dot = vector1.dotProduct(vector2);
-        
-        Matrix cross = vector1.crossProduct(vector2);
-        
-        Matrix mTransp = m2.transpose();
-        
-        m1.showMatrix();
-        System.out.print("\n");
-        m2.showMatrix();
-        System.out.print("\n");
-        mTransp.showMatrix();
-        System.out.print("\n");
-        System.out.println(m2.equality(m2same));
-        System.out.print("\n");
-        result.showMatrix();
-        System.out.print("\n");
-        System.out.println(dot);
-        System.out.print("\n");
-        cross.showMatrix();
-        System.out.print("\n");
-        
-        System.out.print("\n");
-        
-        System.out.print("\n");
-        */
     }
     
     public void objectHelp() {
@@ -600,5 +559,90 @@ public class A1 {
                 p2.rotation(Integer.parseInt(params[0]), Integer.parseInt(params[1]), Integer.parseInt(params[2]));
             }
         }
+    }
+    
+    public void tests() {
+        Matrix testM1 = new Matrix();
+        Matrix testM2 = new Matrix(4,4,new double[][] {{1,2,3,4},{4,3,2,1},{9,8,7,6},{6,7,8,9}});
+        
+        Matrix mult1 = new Matrix(4,4,new double[][] {{1,2,3,0},{4,5,6,0},{7,8,9,0},{0,0,0,1}});
+        Matrix mult2 = new Matrix(4,4,new double[][] {{9,8,7,0},{6,5,4,0},{3,2,1,0},{0,0,0,1}});
+        
+        Matrix vector1 = new Matrix(4,1,new double[][] {{1},{2},{3},{1}});
+        Matrix vector2 = new Matrix(4,1,new double[][] {{4},{5},{6},{1}});
+        
+        Matrix cross1 = new Matrix(3,1,new double[][] {{1},{2},{3}});
+        Matrix cross2 = new Matrix(3,1,new double[][] {{4},{5},{6}});
+        
+        Matrix breaker = new Matrix(2,2,new double[][] {{1,1},{2,2}});
+        
+        
+        Matrix result = mult1.multiplication(mult2);
+        
+        int dot = vector1.dotProduct(vector2);
+        
+        Matrix cross = cross1.crossProduct(cross2);
+        
+        Matrix mTransp = testM2.transpose();
+        
+        Point3D testP1 = new Point3D(1, 2, 3);
+        
+        
+        System.out.println("Matrix Multplication:");
+        System.out.println("Matrix One:");
+        mult1.showMatrix();
+        System.out.println("Matrix Two:");
+        mult2.showMatrix();
+        System.out.println("Matrix Result:");
+        result.showMatrix();
+        System.out.println("");
+        System.out.println("Matrix Transpose:");
+        System.out.println("Original Matrix:");
+        testM2.showMatrix();
+        System.out.println("Transposed Matrix:");
+        mTransp.showMatrix();
+        System.out.println("");
+        System.out.println("Matrix Equality");
+        System.out.println("Comparing Matrix Two with itself:");
+        System.out.println(testM2.equality(testM2));
+        System.out.println("Comparing Matrix Two with Matrix One:");
+        System.out.println(testM2.equality(testM1));
+        System.out.println("");
+        System.out.println("Matrix Dot Product:");
+        System.out.println("Vector One:");
+        vector1.showMatrix();
+        System.out.println("Vector Two:");
+        vector2.showMatrix();
+        System.out.println("Dot Product Result:");
+        System.out.println(dot);
+        System.out.println("");
+        System.out.println("Matrix Cross Product");
+        System.out.println("Cross Vector One:");
+        cross1.showMatrix();
+        System.out.println("Cross Vector Two:");
+        cross2.showMatrix();
+        System.out.println("Cross Product Result:");
+        cross.showMatrix();
+        System.out.println("\n");
+        System.out.println("3D Point functions:");
+        System.out.print("Original Point");
+        testP1.showPoint();
+        System.out.println("3D Point Translation:");
+        testP1.translation(3, 1, 1);
+        testP1.showPoint();
+        System.out.println("3D Point Scaling:");
+        testP1.scale(2,3,2);
+        testP1.showPoint();
+        System.out.println("3D Point X Rotation:");
+        testP1.rotation(45, 0, 0);
+        testP1.showPoint();
+        System.out.println("3D Point Y Rotation:");
+        testP1.rotation(0, 45, 0);
+        testP1.showPoint();
+        System.out.println("3d Point Z Rotation:");
+        testP1.rotation(0, 0, 45);
+        testP1.showPoint();
+        
+        System.out.println("\nEnd of Tests");
     }
 }
