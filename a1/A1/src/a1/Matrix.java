@@ -13,17 +13,17 @@ public class Matrix {
     public int cols;
     public int rows;
     
-    public int[][] matrix;
+    public double[][] matrix;
     
     public Matrix() {
         this.cols = 4;
         this.rows = 4;
         
-        this.matrix = new int[][] {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
+        this.matrix = new double[][] {{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
         
     }
     
-    public Matrix(int rows, int cols, int[][] array) {
+    public Matrix(int rows, int cols, double[][] array) {
         this.cols = cols;
         this.rows = rows;
         
@@ -32,7 +32,7 @@ public class Matrix {
     
     public Matrix transpose() {
         
-        int[][] transp = new int[cols][rows];
+        double[][] transp = new double[cols][rows];
         
         for(int i=0;i<rows;i++) {
             for(int j=0;j<cols;j++) {
@@ -67,7 +67,7 @@ public class Matrix {
             return null;
         }
         
-        int[][] multi = new int[this.rows][neo.cols];
+        double[][] multi = new double[this.rows][neo.cols];
         
         for(int i=0;i<this.rows;i++) {
             for(int j=0;j<neo.cols;j++) {
@@ -75,7 +75,7 @@ public class Matrix {
                 for(int k=0;k<this.cols;k++) {
                     sum += this.matrix[i][k] * neo.matrix[k][j];
                 }
-                multi[i][j] = sum;
+                multi[i][j] = (int)sum;
             }
         }
         
@@ -92,6 +92,7 @@ public class Matrix {
     public int dotProduct(Matrix neo) {
         
         if(this.cols != 1 || neo.cols != 1 || this.rows != neo.rows) {
+            System.out.println("Matrices are not Vectors Matrices, Dot Product requires two Nx1 matrices");
             return Integer.MAX_VALUE;
         }
         
@@ -101,17 +102,22 @@ public class Matrix {
             result += this.matrix[i][0] * neo.matrix[i][0];
         }
         
-        return result;
+        return (int)result;
     }
     
     public Matrix crossProduct(Matrix neo) {
         
-        int x = this.matrix[0][0];
-        int y = this.matrix[1][0];
-        int z = this.matrix[2][0];
+        if(this.cols != 1 || neo.cols != 1 || this.rows != 3 || neo.rows != 3) {
+            System.out.println("Matrices are not Vectors Matrices, Cross Product requires two 3x1 matrices");
+            return null;
+        }
+        
+        double x = this.matrix[0][0];
+        double y = this.matrix[1][0];
+        double z = this.matrix[2][0];
         
         
-        Matrix dual = new Matrix(this.rows, this.rows, new int[][] {{0,-z,y},{z,0,-x},{-y,x,0}});
+        Matrix dual = new Matrix(this.rows, this.rows, new double[][] {{0,-z,y},{z,0,-x},{-y,x,0}});
         
         Matrix result = dual.multiplication(neo);
         
