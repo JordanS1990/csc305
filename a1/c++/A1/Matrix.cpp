@@ -68,6 +68,7 @@ Matrix* Matrix::multiplication(Matrix* neo) {
     double **nMatrix = neo->matrix;
     
     if(this->cols != nRows) {
+        cout << "Matrix Size Mismatch" << endl;
         return NULL;
     }
         
@@ -79,7 +80,7 @@ Matrix* Matrix::multiplication(Matrix* neo) {
             for(int k=0;k<this->cols;k++) {
                 sum += this->matrix[i][k] * nMatrix[k][j];
             }
-            multi[j + (cols*i)] = (int)sum;
+            multi[j + (nCols*i)] = (int)sum;
         }
     }
 
@@ -94,7 +95,7 @@ Matrix* Matrix::inverse() {
 int Matrix::dotProduct(Matrix* neo) {
     
     if(this->cols != 1 || neo->cols != 1 || this->rows != neo->rows) {
-        cout << "Matrices are not Vectors Matrices, Dot Product requires two Nx1 matrices";
+        cout << "Matrices are not Vectors Matrices, Dot Product requires two Nx1 matrices" << endl;
         return INT_MAX;
     }
 
@@ -108,13 +109,13 @@ int Matrix::dotProduct(Matrix* neo) {
     
 }
 
-Matrix* Matrix::crossProduct(Matrix *neo) {
+Matrix* Matrix::crossProduct(Matrix* neo) {
     
     int nRows = neo->rows;
     int nCols = neo->cols;
     
     if(this->cols != 1 || nCols != 1 || this->rows != 3 || nRows != 3) {
-        cout << "Matrices are not Vectors Matrices, Cross Product requires two 3x1 matrices";
+        cout << "Matrices are not Vectors Matrices, Cross Product requires two 3x1 matrices" << endl;
         return NULL;
     }
 
@@ -125,6 +126,8 @@ Matrix* Matrix::crossProduct(Matrix *neo) {
     double temp[] = {0,-z,y,z,0,-x,-y,x,0};
 
     Matrix* dual = new Matrix(this->rows, this->rows, temp);
+    
+    double thing[3];
 
     return dual->multiplication(neo); 
 }

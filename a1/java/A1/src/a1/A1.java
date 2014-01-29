@@ -643,6 +643,15 @@ public class A1 {
         testP1.rotation(0, 0, 45);
         testP1.showPoint();
         
+        System.out.println("\n");
+        System.out.println("Error Tests");
+        System.out.println("Incompatible Matrix Sizes:");
+        Matrix err1 = breaker.multiplication(testM2);
+        System.out.println("Nx1 Vectors not used in dot product:");
+        int err2 = testM1.dotProduct(testM2);
+        System.out.println("3x1 Vectors not used in Cross Product:");
+        Matrix err3 = testM1.crossProduct(testM2);
+        
         System.out.println("\nEnd of Tests");
     }
 }

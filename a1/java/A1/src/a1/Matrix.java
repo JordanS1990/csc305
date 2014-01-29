@@ -64,6 +64,7 @@ public class Matrix {
     public Matrix multiplication(Matrix neo) {
         
         if(this.cols != neo.rows) {
+            System.out.println("Matrix Size Mismatch");
             return null;
         }
         
