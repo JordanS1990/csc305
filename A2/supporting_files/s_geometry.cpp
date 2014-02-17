@@ -149,13 +149,13 @@ void Geometry::draw(Matrix4x4 & m_ProjectionMatrix,
          *  complete comments for the tagged (//comment:) lines of code;
          */
         
-        //comment:
+        //Bind VBO as being active Buffer and store vertex attributes:
         glBindBuffer(GL_ARRAY_BUFFER, mColorBuffer);
-        //comment:
+        //Copy Data to Buffer - 4 elements for colour array:
         glBufferData(GL_ARRAY_BUFFER, 4 * mColors.size() * sizeof(GLfloat), & mColors[0], GL_DYNAMIC_DRAW);
-        //comment:
+        //Enable vertex attribute array for attribute:
         glEnableVertexAttribArray(colorParam->getHandle());
-        //comment:
+        //Specify that colour data is in colorParam and that there will be 4 elements per vertex:
         glVertexAttribPointer(colorParam->getHandle(),
                               4,
                               GL_FLOAT,
@@ -166,13 +166,13 @@ void Geometry::draw(Matrix4x4 & m_ProjectionMatrix,
 
     if(texCoordParam)
     {
-        //comment:
+        //Bind VBO as being active Buffer and store vertex attributes:
         glBindBuffer(GL_ARRAY_BUFFER, mTexCoordBuffer);
-        //comment:
+        //Copy Data to Buffer - 3 elements for texture array:
         glBufferData(GL_ARRAY_BUFFER, 4 * mTexCoords.size() * sizeof(GLfloat), & mTexCoords[0], GL_DYNAMIC_DRAW);
-        //comment:
+        //Enable vertex attribute array for attribute:
         glEnableVertexAttribArray(texCoordParam->getHandle());
-        //comment:
+        //Specify that colour data is in texCoordParam and that there will be 3 elements per vertex:
         glVertexAttribPointer(texCoordParam->getHandle(),
                               3,
                               GL_FLOAT,
@@ -183,13 +183,13 @@ void Geometry::draw(Matrix4x4 & m_ProjectionMatrix,
 
     if(normalParam)
     {
-        //comment:
+        //Bind VBO as being active Buffer and store vertex attributes:
         glBindBuffer(GL_ARRAY_BUFFER, mNormalBuffer);
-        //comment:
+        //Copy Data to Buffer - 3 elements for Normal array:
         glBufferData(GL_ARRAY_BUFFER, 4 * mNormals.size() * sizeof(GLfloat), & mNormals[0], GL_DYNAMIC_DRAW);
-        //comment:
+        //Enable vertex attribute array for attribute:
         glEnableVertexAttribArray(normalParam->getHandle());
-        //comment:
+        //Specify that normal data is in normalParam and that there will be 3 elements per vertex:
         glVertexAttribPointer(normalParam->getHandle(),
                               3,
                               GL_FLOAT,
@@ -200,13 +200,13 @@ void Geometry::draw(Matrix4x4 & m_ProjectionMatrix,
 
     if(vertexParam)
     {
-        //comment:
+        //Bind VBO as being active Buffer and store vertex attributes:
         glBindBuffer(GL_ARRAY_BUFFER, mVertexBuffer);
-        //comment:
+        //Copy Data to Buffer - 3 elements for vertex array:
         glBufferData(GL_ARRAY_BUFFER, 4 * mVertices.size() * sizeof(GLfloat), & mVertices[0], GL_DYNAMIC_DRAW);
-        //comment:
+        //Enable vertex attribute array for attribute:
         glEnableVertexAttribArray(vertexParam->getHandle());
-        //comment:
+        //Specify that verte data is in vertexParam and that there will be 3 elements per vertex:
         glVertexAttribPointer(vertexParam->getHandle(),
                               3,
                               GL_FLOAT,
