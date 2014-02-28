@@ -92,8 +92,13 @@ void BasicOpenGLView::loadMaterial(std::string m_Material)
              * use the texturePath to load an image from disc, and transfer its data to
              * OpenGL and store the OpenGL image handle in mTextureHandle
              */
+            /*
+            std::string texturePath = filePath + line.substr(texture.size() + 1);
 
-
+            std::ifstream t(texturePath.c_str());
+            std::stringstream tbuffer;
+            tbuffer << t.rdbuf();
+            */
         }
         else if(line.compare(0, bump.size(), bump) == 0)
         {
