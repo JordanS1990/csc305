@@ -7,5 +7,5 @@ out vec4 fColor;
 
 void main()
 {
-    fColor = vColor * diffuse_intensity;
+    fColor = vColor;
 }
