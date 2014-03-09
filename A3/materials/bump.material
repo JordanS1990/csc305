@@ -1,0 +1,4 @@
+vertex bump.vs
+fragment bump.fs
+texture colormap.png
+bumpmap bumps.png

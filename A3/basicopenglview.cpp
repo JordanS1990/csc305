@@ -92,23 +92,44 @@ void BasicOpenGLView::loadMaterial(std::string m_Material)
              * use the texturePath to load an image from disc, and transfer its data to
              * OpenGL and store the OpenGL image handle in mTextureHandle
              */
-            /*
-            std::string texturePath = filePath + line.substr(texture.size() + 1);
 
-            std::ifstream t(texturePath.c_str());
-            std::stringstream tbuffer;
-            tbuffer << t.rdbuf();
-            */
+            QImage image = QImage();
+            image.load(QString(texturePath.c_str()));
+            image = QGLWidget::convertToGLFormat(image);
+
+            glGenTextures(1, &mTextureHandle);
+            glBindTexture(GL_TEXTURE_2D, mTextureHandle);
+
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)image.width(), (GLsizei)image.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits());
+
+            glGenerateMipmap(GL_TEXTURE_2D);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glBindTexture(GL_TEXTURE_2D, 0);
         }
         else if(line.compare(0, bump.size(), bump) == 0)
         {
-            std::string texturePath = filePath + line.substr(texture.size() + 1);
+            std::string bumpPath = filePath + line.substr(texture.size() + 1);
 
             /**
              * @todo assignment 3
              * use the texturePath to load an image from disc, and transfer its data to
              * OpenGL and store the OpenGL image handle in mBumpTextureHandle
              */
+
+            QImage image = QImage();
+            image.load(QString(bumpPath.c_str()));
+            image = QGLWidget::convertToGLFormat(image);
+
+            glGenTextures(1, &mBumpTextureHandle);
+            glBindTexture(GL_TEXTURE_2D, mBumpTextureHandle);
+
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)image.width(), (GLsizei)image.height(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bits());
+
+            glGenerateMipmap(GL_TEXTURE_2D);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glBindTexture(GL_TEXTURE_2D, 0);
 
         }
         else

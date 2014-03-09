@@ -17,15 +17,19 @@ out vec4 vColor;
 
 void main()
 {
-	vec4 diffuse = vec4(1.0, 0.0, 0.0, 1.0);
-	vec4 ambient = vec4(0.4, 0.0, 0.4, 1.0);
+	vec4 diffuse = lightCol;
+	vec4 ambient = lightCol * 0.2;
 	vec4 specular = vec4(1.0, 1.0, 1.0, 0.4);
 	float shininess = 50;
+	
+	vec4 v = vec4(vertex, 1.0);
+	mat4 modelView = viewMatrix * modelMatrix;
+	vec3 thing = vec3(modelView * v);
 
-	vec3 lamb = normalize(lightPos - vertex);
+	vec3 lamb = normalize(lightPos - thing);
 
-	vec4 position = modelMatrix * vec4(vertex, 1.0);
-	gl_Position = projectionMatrix * viewMatrix * position;
+	vec4 position = modelView * v;
+	gl_Position = projectionMatrix * viewMatrix * modelMatrix * v;
 
 	vec3 normal = normalMatrix * normal;
 	normal = normalize(normal);
@@ -36,9 +40,9 @@ void main()
 	diff = clamp(diff, 0.0, 1.0);
 
 	vec3 refl = normalize(reflect(-lamb,normal));
-	vec3 eye = normalize(-vertex);
+	vec3 eye = normalize(-thing);
 	vec4 spec = specular * pow(max(dot(refl,eye), 0.0), 0.3*shininess);
 	spec = clamp(spec, 0.0, 1.0);
 
-	vColor = diff + spec;
+	vColor = ambient + diff + spec;
 }

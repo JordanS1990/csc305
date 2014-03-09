@@ -1,0 +1,3 @@
+vertex texture.vs
+fragment texture.fs
+texture colormap.png
